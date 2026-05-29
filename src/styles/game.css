@@ -1,0 +1,63 @@
+:root {
+  color-scheme: dark;
+  --ink: #f6ead2;
+  --muted: #c5b99d;
+  --panel: rgba(25, 30, 38, 0.9);
+  --line: rgba(246, 234, 210, 0.22);
+  --gold: #e6c36a;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; overflow: hidden; background: #0f1218; color: var(--ink); font-family: "Trebuchet MS", "Segoe UI", sans-serif; }
+button { border: 1px solid var(--line); background: #273241; color: var(--ink); min-height: 36px; padding: 8px 12px; border-radius: 7px; font-weight: 700; cursor: pointer; }
+button:hover:not(:disabled) { border-color: var(--gold); background: #344154; }
+button:disabled { opacity: 0.45; cursor: not-allowed; }
+#app, #game-root, #ui-root { position: fixed; inset: 0; }
+#game-root canvas { image-rendering: pixelated; }
+#ui-root { pointer-events: none; }
+#ui-root button, #ui-root .modal { pointer-events: auto; }
+.hud { position: absolute; left: 18px; right: 18px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.hud-top { top: 14px; }
+.brand, .objective, .hero-chip, .prompt, .combatant, .battle-log, .command-panel, .panel, .dialogue { border: 1px solid var(--line); background: var(--panel); box-shadow: 0 14px 40px rgba(0,0,0,0.25); backdrop-filter: blur(10px); }
+.brand { display: flex; flex-direction: column; min-width: 190px; padding: 10px 12px; border-radius: 8px; }
+.brand span, .objective, .hero-chip span, .hero-chip small, .combatant span { color: var(--muted); }
+.objective { flex: 1; max-width: 540px; padding: 11px 14px; border-radius: 8px; text-align: center; }
+.icon-btn { min-width: 72px; }
+.party-strip { position: absolute; left: 18px; bottom: 16px; display: flex; gap: 8px; max-width: calc(100vw - 36px); }
+.hero-chip { display: grid; grid-template-columns: auto auto; gap: 3px 10px; min-width: 165px; padding: 9px 11px; border-radius: 8px; font-size: 13px; }
+.hero-chip strong { color: #fff; }
+.hero-chip small { grid-column: 1 / -1; }
+.prompt { position: absolute; left: 50%; bottom: 92px; min-width: 220px; transform: translateX(-50%); padding: 10px 14px; border-radius: 8px; text-align: center; }
+.title-screen, .modal { position: fixed; inset: 0; display: grid; place-items: center; background: radial-gradient(circle at 50% 20%, rgba(118,151,129,0.24), transparent 34%), rgba(9,11,15,0.62); }
+.title-copy { width: min(580px, calc(100vw - 32px)); padding: 34px; border: 1px solid var(--line); border-radius: 8px; background: rgba(16,20,26,0.92); }
+.eyebrow { color: var(--gold); text-transform: uppercase; letter-spacing: 0; font-size: 12px; font-weight: 800; }
+h1, h2, h3, p { margin-top: 0; }
+h1 { margin-bottom: 12px; font-size: clamp(42px, 8vw, 72px); line-height: 0.95; }
+.title-actions, .menu-actions, .commands { display: flex; flex-wrap: wrap; gap: 8px; }
+.dialogue, .panel { width: min(760px, calc(100vw - 28px)); max-height: calc(100vh - 32px); overflow: auto; padding: 22px; border-radius: 8px; }
+.wide { width: min(900px, calc(100vw - 28px)); }
+.panel-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; border-bottom: 1px solid var(--line); }
+.menu-grid { display: grid; grid-template-columns: 1.1fr 1.2fr 1fr; gap: 14px; }
+.item-row, .quest { margin-bottom: 10px; padding: 10px; border: 1px solid var(--line); border-radius: 8px; background: rgba(255,255,255,0.04); display: grid; gap: 8px; }
+.item-row span, .quest span { color: var(--muted); }
+.battle-hud { position: fixed; inset: 0; }
+.enemy-row { position: absolute; top: 80px; right: 60px; display: flex; gap: 10px; }
+.combatant { display: grid; min-width: 132px; gap: 4px; padding: 10px; border-radius: 8px; }
+.combatant.enemy { border-color: rgba(216, 101, 115, 0.55); }
+.battle-log { position: absolute; left: 32px; bottom: 126px; width: min(420px, calc(100vw - 64px)); min-height: 112px; padding: 12px; border-radius: 8px; }
+.battle-log p { margin: 0 0 5px; }
+.command-panel { position: absolute; right: 32px; bottom: 126px; width: min(450px, calc(100vw - 64px)); padding: 12px; border-radius: 8px; }
+.turn-label { margin-bottom: 8px; color: var(--gold); font-weight: 800; }
+.party-strip.battle { bottom: 18px; }
+.toast { position: fixed; left: 50%; top: 78px; transform: translateX(-50%); z-index: 10; max-width: min(520px, calc(100vw - 32px)); padding: 10px 14px; border: 1px solid rgba(230,195,106,0.45); border-radius: 8px; background: rgba(34,31,23,0.94); color: #fff4cc; }
+@media (max-width: 760px) {
+  .hud { left: 10px; right: 10px; align-items: stretch; }
+  .objective { display: none; }
+  .party-strip { left: 10px; right: 10px; bottom: 10px; overflow-x: auto; }
+  .hero-chip { min-width: 145px; font-size: 12px; }
+  .menu-grid { grid-template-columns: 1fr; }
+  .battle-log, .command-panel { left: 10px; right: 10px; width: auto; }
+  .battle-log { bottom: 235px; }
+  .command-panel { bottom: 78px; }
+  .enemy-row { top: 82px; right: 10px; max-width: calc(100vw - 20px); overflow-x: auto; }
+}
